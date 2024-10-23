@@ -1,0 +1,28 @@
+<h2>Products with Categories</h2>
+<button (click)="loadProductsWithCategory()">Load Products with Category</button>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Category ID</th>
+      <th>Category Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products">
+      <td>{{ product.name }}</td>
+      <td>{{ product.price }}</td>
+      <td>{{ product.categoryID }}</td>
+      <td>{{ product.categoryName }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Available Categories</h3>
+<ul>
+  <li *ngFor="let category of categories">
+    {{ category.name }} (ID: {{ category.id }})
+  </li>
+</ul>

@@ -1,0 +1,88 @@
+<div class="container">
+  <h2>Product Management</h2>
+
+  <!-- Ürün ekleme formu -->
+  <form (ngSubmit)="addProduct()">
+    <div>
+      <label for="name">Product Name:</label>
+      <input id="name" [(ngModel)]="newProduct.name" name="name" required />
+    </div>
+    <div>
+      <label for="price">Product Price:</label>
+      <input id="price" type="number" [(ngModel)]="newProduct.price" name="price" required />
+    </div>
+    <div>
+      <label for="categoryID">Category:</label>
+      <select id="categoryID" [(ngModel)]="newProduct.categoryID" name="categoryID" required>
+        <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+      </select>
+    </div>
+    <button type="submit">Add Product</button>
+    <button (click)="loadProducts()">List Products</button>
+  </form>
+  <!-- <form (ngSubmit)="addProduct()">
+    <div>
+      <label for="name">Product Name:</label>
+      <input id="name" [(ngModel)]="newProduct.name" name="name" required />
+    </div>
+    <div>
+      <label for="price">Product Price:</label>
+      <input id="price" type="number" [(ngModel)]="newProduct.price" name="price" required />
+    </div>
+    <div>
+      <label for="categoryID">Category:</label>
+      <select id="categoryID" [(ngModel)]="newProduct.categoryID" name="categoryID" required>
+        <option *ngFor="let category of categoryComponent.categories" [value]="category.id">{{ category.name }}</option>
+      </select>
+    </div>
+    <button type="submit">Add Product</button>
+    <button (click)="loadProducts()">List Products</button>
+  </form> -->
+
+
+  <app-category> </app-category>
+
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Category ID</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product.name }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.categoryID }}</td>
+        <td>h
+          <button (click)="editProduct(product)">Edit</button>
+          <button *ngIf="product.id" (click)="deleteProduct(product.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <div *ngIf="selectedProduct">
+    <h3>Edit Product</h3>
+    <form (ngSubmit)="updateProduct()">
+      <div>
+        <label for="editName">Product Name:</label>
+        <input id="editName" [(ngModel)]="selectedProduct.name" name="editName" required />
+      </div>
+      <div>
+        <label for="editPrice">Product Price:</label>
+        <input id="editPrice" type="number" [(ngModel)]="selectedProduct.price" name="editPrice" required />
+      </div>
+      <div>
+        <label for="editCategoryID">Category ID:</label>
+        <input id="editCategoryID" [(ngModel)]="selectedProduct.categoryID" name="editCategoryID" required />
+      </div>
+      <button type="submit">Update Product</button>
+      <button type="button" (click)="cancelEdit()">Cancel</button>
+    </form>
+  </div>
+</div>
